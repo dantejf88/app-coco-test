@@ -1,13 +1,11 @@
 import { useDraggable } from "../../hooks";
+import { DraggableShapeProps } from "./types";
 import { renderShape } from "./utils";
 
 export const DraggableShape = ({
   shape,
   areaDimensions,
-}: {
-  shape: { id: number; type: string; position: { x: number; y: number } };
-  areaDimensions: { width: number; height: number };
-}) => {
+}: DraggableShapeProps) => {
   const { position, bind } = useDraggable(shape.position, areaDimensions);
   return (
     <div

@@ -1,71 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
 import { SHAPES } from "./constants";
 import { renderShape } from "../DraggableShape/utils";
-
-interface OptionsColumnProps {
-  setAreaDimensions: (dimensions: { width: number; height: number }) => void;
-  shapesList: {
-    id: number;
-    type: string;
-    position: { x: number; y: number };
-  }[];
-  setShapesList: Dispatch<
-    SetStateAction<
-      {
-        id: number;
-        type: string;
-        position: {
-          x: number;
-          y: number;
-        };
-      }[]
-    >
-  >;
-  imagesList: { id: number; src: string; position: { x: number; y: number } }[];
-  setImagesList: Dispatch<
-    SetStateAction<
-      {
-        id: number;
-        src: string;
-        position: {
-          x: number;
-          y: number;
-        };
-      }[]
-    >
-  >;
-  textsList: {
-    id: number;
-    text: string;
-    position: { x: number; y: number };
-    textSize: string;
-    fontFamily: string;
-    textColor: string;
-  }[];
-  setTextsList: Dispatch<
-    SetStateAction<
-      {
-        id: number;
-        text: string;
-        position: {
-          x: number;
-          y: number;
-        };
-        textSize: string;
-        fontFamily: string;
-        textColor: string;
-      }[]
-    >
-  >;
-  setTextSize: Dispatch<SetStateAction<string>>;
-  textSize: string;
-  setText: React.Dispatch<React.SetStateAction<string>>;
-  text: string;
-  setFontFamily: React.Dispatch<React.SetStateAction<string>>;
-  fontFamily: string;
-  setTextColor: React.Dispatch<React.SetStateAction<string>>;
-  textColor: string;
-}
+import { OptionsColumnProps } from "./types";
 
 const OptionsColumn = (props: OptionsColumnProps) => {
   const {
@@ -130,8 +65,16 @@ const OptionsColumn = (props: OptionsColumnProps) => {
   };
 
   return (
-    <div style={{ display: "flex", width: "20%", height: "100%" }}>
-      <div style={{ width: "100%", padding: "20px", background: "#f0f0f0" }}>
+    <div
+      style={{
+        display: "flex",
+        width: "20%",
+        height: "100%",
+        padding: "0 20px",
+        background: "#f0f0f0",
+      }}
+    >
+      <div style={{ width: "100%" }}>
         <h2 style={{ marginBottom: "15px" }}>Upload an Image</h2>
         <div
           style={{
@@ -180,7 +123,7 @@ const OptionsColumn = (props: OptionsColumnProps) => {
             />
           </div>
           <div style={{ marginTop: "20px" }}>
-            <label>Text Size: </label>
+            <label>Font Size: </label>
             <select
               value={textSize}
               onChange={(e) => setTextSize(e.target.value)}
@@ -192,6 +135,8 @@ const OptionsColumn = (props: OptionsColumnProps) => {
               <option value="18px">18px</option>
               <option value="20px">20px</option>
               <option value="24px">24px</option>
+              <option value="28px">28px</option>
+              <option value="32px">32px</option>
             </select>
           </div>
           <div style={{ marginTop: "20px" }}>
@@ -214,7 +159,7 @@ const OptionsColumn = (props: OptionsColumnProps) => {
               flexDirection: "column",
             }}
           >
-            <label>Text Color: </label>
+            <label>Font Color: </label>
             <input
               type="color"
               value={textColor}
@@ -240,7 +185,7 @@ const OptionsColumn = (props: OptionsColumnProps) => {
               cursor: text ? "pointer" : "not-allowed",
             }}
           >
-            Add
+            Add Text
           </button>
         </div>
         <div
@@ -272,7 +217,7 @@ const OptionsColumn = (props: OptionsColumnProps) => {
                   width: "60px",
                 }}
               >
-                <div style={{ ...renderShape(shape.type) }} />
+                <div style={{ ...renderShape(shape.type, 50) }} />
               </div>
             ))}
           </div>
@@ -283,13 +228,13 @@ const OptionsColumn = (props: OptionsColumnProps) => {
             !shapesList.length && !imagesList.length && !textsList.length
           }
           style={{
-            marginTop: "20px",
+            marginTop: "50px",
             padding: "10px",
             width: "100%",
             backgroundColor:
               !shapesList.length && !imagesList.length && !textsList.length
-                ? "#A5D6A7"
-                : "#4CAF50",
+                ? "#f1b9b9"
+                : "#f30101",
             color: "white",
             border: "none",
             cursor:

@@ -1,4 +1,5 @@
 import { useDraggable } from "../../hooks";
+import { DraggableTextProps } from "./types";
 
 export const DraggableText = ({
   text,
@@ -7,14 +8,7 @@ export const DraggableText = ({
   textSize,
   fontFamily,
   textColor,
-}: {
-  text: string;
-  initialPosition: { x: number; y: number };
-  areaDimensions: { width: number; height: number };
-  textSize: string;
-  fontFamily: string;
-  textColor: string;
-}) => {
+}: DraggableTextProps) => {
   const { position, bind } = useDraggable(initialPosition, areaDimensions);
 
   return (
